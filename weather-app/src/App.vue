@@ -16,6 +16,7 @@
     </v-toolbar>
 
     <v-content>
+      <Map/>
       <HelloWorld/>
     </v-content>
   </v-app>
@@ -23,15 +24,17 @@
 
 <script>
 import HelloWorld from './components/HelloWorld'
+import Map from './components/Map'
 
 export default {
   name: 'App',
   components: {
-    HelloWorld
+    HelloWorld,
+    Map
   },
   data () {
     return {
-      //
+      
     }
   }
 }
