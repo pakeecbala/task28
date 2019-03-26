@@ -25,12 +25,14 @@
 <script>
 import HelloWorld from './components/HelloWorld'
 import Map from './components/Map'
+import MapForecast from './components/MapForecast'
 
 export default {
   name: 'App',
   components: {
     HelloWorld,
-    Map
+    Map,
+    MapForecast
   },
   data () {
     return {
