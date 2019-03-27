@@ -37,8 +37,8 @@ export default {
     description: String,
     icon: String,
     date: String,
-    minTemp: String,
-    maxTemp: String
+    minTemp: Number,
+    maxTemp: Number
   },
 
   updated() {
