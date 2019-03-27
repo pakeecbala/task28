@@ -1,44 +1,24 @@
 <template>
-<v-container>
-    <v-btn
-        flat
-        href="#"
-        
-      >
-        <span class="mr-2">Today{{temp}}</span>
-      </v-btn>
+  <div>
+    <div id="map" class="map w-100 p-3"/>
+    <Weather :temp= this.temp :wind= this.wind :humidity= this.humidity :city = this.city :description = this.description :icon = this.icon />
 
-       <v-btn
-        flat
-        href="#"
-    
-      >
-        <span class="mr-2">Tomorrow</span>
-      </v-btn>
-
-       <v-btn
-        flat
-        href="#"
-        
-      >
-        <span class="mr-2">Next Week</span>
-      </v-btn>
-      
-    <div id="map" class="map w-100 p-3"></div>
-</v-container>
+  </div>
+  
+  
 
 </template>
 
 <script>
-import axios from 'axios'
+import axios from "axios";
+import Weather from "@/components/Weather";
 export default {
-  data() {
-    return {
+  props: {
     temp: '',
     minTemp: '',
     maxTemp:'',
-    sunrise: '',
-    sunset: '',
+    description: '',
+    iconURL: '',
     pressure: '',
     humidity: '',
     wind: '',
@@ -46,44 +26,55 @@ export default {
     icon: '',
     long: '',
     lat: '',
+    city: '',
     temperatureArr: [],
-    coordinates: [],
-    }
+    descriptionArr: [],
+    
+  },
+  components:{
+    Weather
   },
 
-  mounted() {
-    this.initMap();
-    this.getWeather();  
+  beforeMount(){
+    this.getWeather();
+
   },
+  
   methods: {
-    
-  getWeather(){
+    getWeather() {
+      this.city= "paris";
       axios
-      .get('http://api.openweathermap.org/data/2.5/forecast?q=oslo,no&APPID=f750b0887be2c24fd1390dd30bec8f1a&units=metric')
-      .then(response => {
+        .get(
+          "http://api.openweathermap.org/data/2.5/forecast?q="+this.city+"&APPID=f750b0887be2c24fd1390dd30bec8f1a&units=metric"
+        )
+        .then(response => {
           this.temperatureArr = response.data.list[0];
+          this.long = response.data.city.coord.lon;
+          this.lat = response.data.city.coord.lat;
           this.temp = this.temperatureArr.main.temp;
+          this.description = response.data.list[1].weather[0].description;
+          this.icon = response.data.list[1].weather[0].icon;
           this.minTemp = this.temperatureArr.main.min_temp;
           this.maxTemp = this.temperatureArr.main.temp_max;
           this.pressure = this.temperatureArr.main.pressure;
           this.humidity = this.temperatureArr.main.humidity + '%';
           this.wind = this.temperatureArr.main.humidity + 'm/s';
-          this.lang = this.response.data.city.coord.lang;
-          this.long = this.response.data.city.coord.long;
-          console.log(long);
+          
+          this.initMap();
 
+        
+  
         })
         .catch(error => {
-        console.log(error);
-      });
+          console.log(error);
+        });
     },
-  
-    initMap() {
-      
-    var mymap = L.map('map').setView([51.505, -0.09], 13);
-    var marker = L.marker([51.5, -0.09]).addTo(mymap);
 
-      var marker = L.marker([51.5, -0.09]).addTo(mymap);
+    initMap() {
+      console.log(this.lat, this.long)
+      var mymap = L.map("map").setView([this.lat,this.long], 13);
+      var marker = L.marker([this.lat, this.long]).addTo(mymap);
+
 
       L.tileLayer(
         "https://api.tiles.mapbox.com/v4/{id}/{z}/{x}/{y}.png?access_token={accessToken}",
@@ -96,12 +87,8 @@ export default {
             "pk.eyJ1Ijoid29raW5nIiwiYSI6ImNqdHByejVjcjA3Nm80ZHIwZTgydDA0aWYifQ.A7Nu-j7baTtMJnjPzrTlNA"
         }
       ).addTo(mymap);
-
     },
-    beforeMount() {
-    this.getWeather();
-  },
+   
   }
-  
 };
 </script>
