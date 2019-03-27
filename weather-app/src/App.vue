@@ -1,16 +1,12 @@
 <template>
   <v-app>
-    <v-toolbar app>
+    <v-toolbar app class="p-3 mb-2 bg-info text-black">
       <v-toolbar-title class="headline text-uppercase">
-<<<<<<< HEAD
-        <span style="margin:auto;" class="font-weight-dark"> Weather Application </span> 
-        <span class="font-weight-light">    MICHAEL & PAKEE    </span>
-=======
-        <span class="font-weight-light">MICHAEL & PAKEE - GROUPTASK 28</span>
->>>>>>> 4ab73c97786afe90f25f2e47b511f85a52d51d9c
+        <span style="margin:auto;" class="font-weight-dark">Weather Application-MICHAEL & PAKEE</span>
+        <span class="font-weight-light"></span>
       </v-toolbar-title>
     </v-toolbar>
-
+    <br>
     <v-content>
       <v-text-field
         hide-details
@@ -18,6 +14,7 @@
         single-line
         v-model="input"
         label="Oslo"
+        color="blue"
         v-on:keyup.enter="$refs.mapRef.updateMap"
         style="width: 20rem; margin:auto"
       ></v-text-field>

@@ -1,7 +1,6 @@
 <template>
-<<<<<<< HEAD
   <div>
-    <b-card-group deck class="p-3 mb-2 bg-light text-dark">
+    <b-card-group deck class="p-3 mb-2 bg-info text-black">
       <b-card style="max-width: 20rem; margin:auto">
         <b-card-title>{{temperatureArr[index].dt_txt}}</b-card-title>
         <b-img :src="image" fluid alt="Responsive image"/>
@@ -13,7 +12,7 @@
         <b-card-text>Humidity: {{temperatureArr[index].dt_txt}}</b-card-text>
       </b-card>
 
-       <b-card style="max-width: 20rem; margin:auto">
+      <b-card style="max-width: 20rem; margin:auto">
         <b-card-title>{{temperatureArr[index+1].dt_txt}}</b-card-title>
         <b-img :src="image" fluid alt="Responsive image"/>
         <b-card-text>{{temperatureArr[index+1].weather[0].description}}</b-card-text>
@@ -24,7 +23,7 @@
         <b-card-text>Humidity: {{temperatureArr[index+1].dt_txt}}</b-card-text>
       </b-card>
 
-       <b-card style="max-width: 20rem; margin:auto">
+      <b-card style="max-width: 20rem; margin:auto">
         <b-card-title>{{temperatureArr[index+2].dt_txt}}</b-card-title>
         <b-img :src="image" fluid alt="Responsive image"/>
         <b-card-text>{{temperatureArr[index+2].weather[0].description}}</b-card-text>
@@ -37,29 +36,19 @@
     </b-card-group>
     <br>
     <div>
-      <b-button style="max-width: 10rem; margin:auto" block variant="outline-dark" @click="handlePrev">&lsaquo; (Be)forecast</b-button>
+      <b-button
+        style="max-width: 10rem; margin:auto"
+        block
+        variant="outline-dark"
+        @click="handlePrev"
+      >&lsaquo; (Be)forecast</b-button>
       <br>
-      <b-button style="max-width: 10rem; margin:auto" block variant="outline-dark" @click="handleNext">Forecast - 3h &rsaquo;</b-button>
-=======
-  <div class="d-flex flex-row">
-    <div class="d-flex justify-content-center d-flex align-items-center">
-      <b-button variant="outline-dark" @click="handlePrev">&lsaquo; Previous</b-button>
-      <b-card-group class="p-b-23 m bg-light text-dark">
-        <b-card>
-          <b-card-title>{{date}}</b-card-title>
-          <b-img :src="image" fluid alt="Responsive image"/>
-          <b-card-text>{{description}}</b-card-text>
-          <b-card-text>Temperature: {{temp}} &deg;C</b-card-text>
-          <b-card-text>Min-Temperature: {{minTemp}} &deg;C</b-card-text>
-          <b-card-text>Max-Temperature: {{maxTemp}} &deg;C</b-card-text>
-          <b-card-text>Wind: {{wind}}</b-card-text>
-          <b-card-text>Humidity: {{humidity}}</b-card-text>
-        </b-card>
-      </b-card-group>
-
-      <b-button variant="outline-dark" @click="handleNext">Next &rsaquo;</b-button>
-      <br>
->>>>>>> 4ab73c97786afe90f25f2e47b511f85a52d51d9c
+      <b-button
+        style="max-width: 10rem; margin:auto"
+        block
+        variant="outline-dark"
+        @click="handleNext"
+      >Forecast - 3h &rsaquo;</b-button>
     </div>
   </div>
 </template>
