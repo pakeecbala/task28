@@ -18,40 +18,63 @@
 
 <script>
 import axios from "axios";
+//we import the Wheather component because we'll send props to it
 import Weather from "@/components/Weather";
 export default {
+  props:{
+    input: String, //defined a prop because we're taking in data from the parent "App"
+  },
   data: function() {
     return {
+      //variables we'll use througout the program
       mymap: null,
       index: 0,
       temp: 0,
+      //description of the weather. I.E cloudy, sunny..etc
       description: "",
       minTemp: 0,
       maxTemp: 0,
       humidity: "",
       wind: "",
+      /*will be passed to the Weather component. Icon contains a 
+      string which will be put in a URL where we get our weather icons
+      */
       icon: "",
       date: "",
       long: "",
       lat: "",
-      city: ""
+      city: "oslo" //the default city where the map and weather loads
     };
   },
   components: {
     Weather
   },
   beforeMount() {
+    /*calls the getWeather method before we mount.
+     In this method we do the API call and assign
+     the variables above*/
     this.getWeather();
   },
 
   methods: {
+    updateMap(){
+      /*in this method we first remove the map that's initialized in initMap()
+        we then assign city to "input" which is passed as a prop from the parent "App.vue"
+        we then call getWeather again to reassign the variables to the right city*/
+      this.mymap.remove()
+      this.city = this.input;
+      this.getWeather()
+      
+    },
+
     handleNext() {
       this.index += 1;
       this.getWeather();
     },
     getWeather() {
-      this.city = "oslo";
-      axios
+      
+    //here we get the API and make the city dynamic
+     axios
         .get(
           "http://api.openweathermap.org/data/2.5/forecast?q=" +
             this.city +
@@ -76,7 +99,7 @@ export default {
           this.wind = this.temperatureArr[this.index].main.humidity + "m/s";
 
           this.date = this.temperatureArr[this.index].dt_txt;
-          console.log(response.data);
+          //variables assigned
           this.initMap();
         })
         .catch(error => {
@@ -85,10 +108,12 @@ export default {
     },
 
     initMap() {
-      console.log(this.lat, this.long);
+      //We set the coordinates for where the map is centered. Zoom is set to 13
       this.mymap = L.map("map").setView([this.lat, this.long], 13);
+      //We set a marker
       var marker = L.marker([this.lat, this.long]).addTo(this.mymap);
 
+      //here we give our map a layout
       L.tileLayer(
         "https://api.tiles.mapbox.com/v4/{id}/{z}/{x}/{y}.png?access_token={accessToken}",
         {

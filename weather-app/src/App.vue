@@ -5,12 +5,12 @@
         <span class="font-weight-light">MICHAEL & PAKEE</span>
       </v-toolbar-title>
       <div class="col-md-3 input-group pull-right">
-        <input placeholder="search places">
+        <input placeholder="search places" v-model="input" v-on:keyup.enter="$refs.mapRef.updateMap">
       </div>
     </v-toolbar>
 
     <v-content>
-      <Map/>
+      <Map ref="mapRef" :input ="this.input" />
       <br>
     </v-content>
   </v-app>
@@ -27,7 +27,9 @@ export default {
     Weather
   },
   data() {
-    return {};
+    return {
+      input: "",
+    };
   }
 };
 </script>

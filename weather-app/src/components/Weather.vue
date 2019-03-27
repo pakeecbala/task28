@@ -23,12 +23,12 @@
 
 <script>
 export default {
-  // To use props, they must be declared
   data: function() {
     return {
       image: ""
     };
   },
+  //Our props
   props: {
     temp: Number,
     wind: String,
