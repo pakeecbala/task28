@@ -1,6 +1,7 @@
 <template>
   <div>
     <div id="map" class="map w-100 p-3"/>
+    <br>
     <Weather
       @on-next="handleNext"
       :temp="this.temp"
@@ -21,8 +22,8 @@ import axios from "axios";
 //we import the Wheather component because we'll send props to it
 import Weather from "@/components/Weather";
 export default {
-  props:{
-    input: String, //defined a prop because we're taking in data from the parent "App"
+  props: {
+    input: String //defined a prop because we're taking in data from the parent "App"
   },
   data: function() {
     return {
@@ -57,14 +58,13 @@ export default {
   },
 
   methods: {
-    updateMap(){
+    updateMap() {
       /*in this method we first remove the map that's initialized in initMap()
         we then assign city to "input" which is passed as a prop from the parent "App.vue"
         we then call getWeather again to reassign the variables to the right city*/
-      this.mymap.remove()
+      this.mymap.remove();
       this.city = this.input;
-      this.getWeather()
-      
+      this.getWeather();
     },
 
     handleNext() {
@@ -72,9 +72,8 @@ export default {
       this.getWeather();
     },
     getWeather() {
-      
-    //here we get the API and make the city dynamic
-     axios
+      //here we get the API and make the city dynamic
+      axios
         .get(
           "http://api.openweathermap.org/data/2.5/forecast?q=" +
             this.city +
