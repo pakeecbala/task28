@@ -22,5 +22,11 @@
         <b-card-text>Humidity: N/A</b-card-text>
       </b-card>
     </b-card-group>
+    <br>
+    <div>
+      <b-button block variant="outline-dark">&lsaquo; Previous</b-button>
+      <b-button block variant="outline-dark">Next &rsaquo;</b-button>
+    </div>
+    <br>
   </div>
 </template>
