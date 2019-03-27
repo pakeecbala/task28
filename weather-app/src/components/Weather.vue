@@ -6,6 +6,8 @@
         <b-img :src="image" fluid alt="Responsive image"/>
         <b-card-text>{{this.description}}</b-card-text>
         <b-card-text>Temperature: {{this.temp}}</b-card-text>
+        <b-card-text>Min-Temperature: {{this.minTemp}}</b-card-text>
+        <b-card-text>Max-Temperature: {{this.maxTemp}}</b-card-text>
         <b-card-text>Wind: {{this.wind}}</b-card-text>
         <b-card-text>Humidity: {{this.humidity}}</b-card-text>
       </b-card>
@@ -34,7 +36,9 @@ export default {
     city: String,
     description: String,
     icon: String,
-    date: String
+    date: String,
+    minTemp: String,
+    maxTemp: String
   },
 
   updated() {

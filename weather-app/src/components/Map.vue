@@ -4,12 +4,14 @@
     <Weather
       @on-next="handleNext"
       :temp="this.temp"
-      :wind="this.wind"
+      :minTemp="this.minTemp"
+      :maxTemp="this.maxTemp"
       :humidity="this.humidity"
-      :city="this.city"
-      :description="this.description"
+      :wind="this.wind"
       :icon="this.icon"
       :date="this.date"
+      :description="this.description"
+      :city="this.city"
     />
   </div>
 </template>
@@ -25,19 +27,13 @@ export default {
       temp: 0,
       minTemp: "",
       maxTemp: "",
-      description: "",
-      iconURL: "",
-      pressure: "",
       humidity: "",
       wind: "",
-      overcast: "",
       icon: "",
+      date: "",
       long: "",
       lat: "",
-      city: "",
-      date: "",
-      temperatureArr: [],
-      descriptionArr: []
+      city: ""
     };
   },
   props: {},
@@ -45,7 +41,7 @@ export default {
     Weather
   },
   mounted() {
-    this.initMap();
+    this.getWeather();
   },
 
   methods: {
@@ -74,9 +70,8 @@ export default {
             this.index
           ].weather[0].description;
           this.icon = this.temperatureArr[this.index].weather[0].icon;
-          this.minTemp = this.temperatureArr[this.index].main.min_temp;
+          this.minTemp = this.temperatureArr[this.index].main.temp_min;
           this.maxTemp = this.temperatureArr[this.index].main.temp_max;
-          this.pressure = this.temperatureArr[this.index].main.pressure;
           this.humidity = this.temperatureArr[this.index].main.humidity + "%";
           this.wind = this.temperatureArr[this.index].main.humidity + "m/s";
 
