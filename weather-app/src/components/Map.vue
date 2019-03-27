@@ -41,7 +41,7 @@ export default {
   components: {
     Weather
   },
-  mounted() {
+  beforeMount() {
     this.getWeather();
   },
 
@@ -78,6 +78,8 @@ export default {
 
           this.date = this.temperatureArr[this.index].dt_txt;
           console.log(response.data);
+          this.initMap();
+
         })
         .catch(error => {
           console.log(error);
