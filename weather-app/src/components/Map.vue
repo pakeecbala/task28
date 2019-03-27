@@ -44,7 +44,10 @@ export default {
     wind: '',
     overcast: '', 
     icon: '',
-    temperatureArr: []
+    long: '',
+    lat: '',
+    temperatureArr: [],
+    coordinates: [],
     }
   },
 
@@ -65,6 +68,10 @@ export default {
           this.pressure = this.temperatureArr.main.pressure;
           this.humidity = this.temperatureArr.main.humidity + '%';
           this.wind = this.temperatureArr.main.humidity + 'm/s';
+          this.lang = this.response.data.city.coord.lang;
+          this.long = this.response.data.city.coord.long;
+          console.log(long);
+
         })
         .catch(error => {
         console.log(error);

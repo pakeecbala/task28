@@ -2,7 +2,7 @@
   <v-app>
     <v-toolbar app>
       <v-toolbar-title class="headline text-uppercase">
-        <span>Weather App{{Map.temp}}</span>
+        <span class="fixScrollUp">Weather App{{Map.temp}}</span>
         <span class="font-weight-light">  MICHAEL &  PAKEE</span>
         
       </v-toolbar-title>
@@ -11,8 +11,6 @@
     <v-content>
       
       <HelloWorld/>
-      <Map/>
-      
       <Map/>
       <br>
       <Weather/>

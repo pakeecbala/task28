@@ -3,5 +3,7 @@
       justify-content: flex-start;
       height: 300px;
       width:400px; 
+      z-index:1;
       
 }
+
