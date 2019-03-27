@@ -9,7 +9,7 @@
     <v-content>
       <Map/>
       <br>
-      <Weather/>
+      
     </v-content>
   </v-app>
 </template>

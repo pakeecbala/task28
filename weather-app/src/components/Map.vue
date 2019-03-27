@@ -1,44 +1,69 @@
 <template>
-  <div id="map" class="map w-100 p-3"></div>
+  <div>
+    <div id="map" class="map w-100 p-3"/>
+    <Weather :temp= this.temp :wind= this.wind :humidity= this.humidity :city = this.city :description = this.description :icon = this.icon />
+
+  </div>
+  
+  
+
 </template>
 
 <script>
 import axios from "axios";
+import Weather from "@/components/Weather";
 export default {
-  data() {
-    return {
-      temp: "",
-      minTemp: "",
-      maxTemp: "",
-      sunrise: "",
-      sunset: "",
-      pressure: "",
-      humidity: "",
-      wind: "",
-      overcast: "",
-      icon: "",
-      temperatureArr: []
-    };
+  props: {
+    temp: '',
+    minTemp: '',
+    maxTemp:'',
+    description: '',
+    iconURL: '',
+    pressure: '',
+    humidity: '',
+    wind: '',
+    overcast: '', 
+    icon: '',
+    long: '',
+    lat: '',
+    city: '',
+    temperatureArr: [],
+    descriptionArr: [],
+    
+  },
+  components:{
+    Weather
   },
 
-  mounted() {
-    this.initMap();
+  beforeMount(){
     this.getWeather();
+
   },
+  
   methods: {
     getWeather() {
+      this.city= "paris";
       axios
         .get(
-          "http://api.openweathermap.org/data/2.5/forecast?q=oslo,no&APPID=f750b0887be2c24fd1390dd30bec8f1a&units=metric"
+          "http://api.openweathermap.org/data/2.5/forecast?q="+this.city+"&APPID=f750b0887be2c24fd1390dd30bec8f1a&units=metric"
         )
         .then(response => {
           this.temperatureArr = response.data.list[0];
+          this.long = response.data.city.coord.lon;
+          this.lat = response.data.city.coord.lat;
           this.temp = this.temperatureArr.main.temp;
+          this.description = response.data.list[1].weather[0].description;
+          this.icon = response.data.list[1].weather[0].icon;
           this.minTemp = this.temperatureArr.main.min_temp;
           this.maxTemp = this.temperatureArr.main.temp_max;
           this.pressure = this.temperatureArr.main.pressure;
-          this.humidity = this.temperatureArr.main.humidity + "%";
-          this.wind = this.temperatureArr.main.humidity + "m/s";
+          this.humidity = this.temperatureArr.main.humidity + '%';
+          this.wind = this.temperatureArr.main.humidity + 'm/s';
+          
+          this.initMap();
+
+        
+  
         })
         .catch(error => {
           console.log(error);
@@ -46,10 +71,10 @@ export default {
     },
 
     initMap() {
-      var mymap = L.map("map").setView([51.505, -0.09], 13);
-      var marker = L.marker([51.5, -0.09]).addTo(mymap);
+      console.log(this.lat, this.long)
+      var mymap = L.map("map").setView([this.lat,this.long], 13);
+      var marker = L.marker([this.lat, this.long]).addTo(mymap);
 
-      var marker = L.marker([51.5, -0.09]).addTo(mymap);
 
       L.tileLayer(
         "https://api.tiles.mapbox.com/v4/{id}/{z}/{x}/{y}.png?access_token={accessToken}",
@@ -63,9 +88,7 @@ export default {
         }
       ).addTo(mymap);
     },
-    beforeMount() {
-      this.getWeather();
-    }
+   
   }
 };
 </script>
