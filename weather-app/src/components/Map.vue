@@ -55,7 +55,7 @@ export default {
         .get(
           "http://api.openweathermap.org/data/2.5/forecast?q=" +
             this.city +
-            "&APPID=f750b0887be2c24fd1390dd30bec8f1a&units=metric"
+            "&APPID=fb7ab8e839d245357544158716e0b60c&units=metric"
         )
         .then(response => {
           this.long = response.data.city.coord.lon;
