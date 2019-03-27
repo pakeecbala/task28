@@ -4,15 +4,8 @@
       <v-toolbar-title class="headline text-uppercase">
         <span>Weather App{{Map.temp}}</span>
         <span class="font-weight-light">  MICHAEL &  PAKEE</span>
+        
       </v-toolbar-title>
-      <v-spacer></v-spacer>
-      <v-btn
-        flat
-        href="https://github.com/vuetifyjs/vuetify/releases/latest"
-        target="_blank"
-      >
-        <span class="mr-2">Latest Release</span>
-      </v-btn>
     </v-toolbar>
 
     <v-content>
@@ -20,6 +13,9 @@
       <HelloWorld/>
       <Map/>
       
+      <Map/>
+      <br>
+      <Weather/>
     </v-content>
   </v-app>
 </template>
@@ -27,19 +23,17 @@
 <script>
 import HelloWorld from './components/HelloWorld'
 import Map from './components/Map'
-import MapForecast from './components/MapForecast'
-import Cities from './components/Cities'
+import Weather from "./components/Weather";
 
 export default {
-  name: 'App',
+  name: "App",
   components: {
     HelloWorld,
-    Map
+    Map,
+    Weather
   },
-  data () {
-    return {
-      
-    }
+  data() {
+    return {};
   }
-}
+};
 </script>
