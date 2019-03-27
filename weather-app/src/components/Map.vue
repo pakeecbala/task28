@@ -22,7 +22,6 @@ export default {
     pressure: '',
     humidity: '',
     wind: '',
-    overcast: '', 
     icon: '',
     long: '',
     lat: '',
@@ -42,13 +41,14 @@ export default {
   
   methods: {
     getWeather() {
-      this.city= "paris";
+      this.city= "oslo";
       axios
         .get(
           "http://api.openweathermap.org/data/2.5/forecast?q="+this.city+"&APPID=f750b0887be2c24fd1390dd30bec8f1a&units=metric"
         )
         .then(response => {
           this.temperatureArr = response.data.list[0];
+          console.log(response.data.list[1].dt_txt);
           this.long = response.data.city.coord.lon;
           this.lat = response.data.city.coord.lat;
           this.temp = this.temperatureArr.main.temp;
@@ -71,7 +71,7 @@ export default {
     },
 
     initMap() {
-      console.log(this.lat, this.long)
+     
       var mymap = L.map("map").setView([this.lat,this.long], 13);
       var marker = L.marker([this.lat, this.long]).addTo(mymap);
 
