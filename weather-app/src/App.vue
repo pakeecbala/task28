@@ -2,42 +2,32 @@
   <v-app>
     <v-toolbar app>
       <v-toolbar-title class="headline text-uppercase">
-        <span>Vuetify</span>
-        <span class="font-weight-light">MATERIAL DESIGN</span>
+        <span>MP -</span>
+        <span class="font-weight-light">GROUP TASK 28</span>
       </v-toolbar-title>
-      <v-spacer></v-spacer>
-      <v-btn
-        flat
-        href="https://github.com/vuetifyjs/vuetify/releases/latest"
-        target="_blank"
-      >
-        <span class="mr-2">Latest Release</span>
-      </v-btn>
     </v-toolbar>
 
     <v-content>
       <Map/>
-      <HelloWorld/>
+      <Weather/>
     </v-content>
   </v-app>
 </template>
 
 <script>
-import HelloWorld from './components/HelloWorld'
-import Map from './components/Map'
-import MapForecast from './components/MapForecast'
+import Map from "./components/Map";
+import MapForecast from "./components/MapForecast";
+import Weather from "./components/Weather";
 
 export default {
-  name: 'App',
+  name: "App",
   components: {
-    HelloWorld,
     Map,
-    MapForecast
+    MapForecast,
+    Weather
   },
-  data () {
-    return {
-      
-    }
+  data() {
+    return {};
   }
-}
+};
 </script>
