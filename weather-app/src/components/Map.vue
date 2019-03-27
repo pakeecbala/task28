@@ -1,18 +1,18 @@
 <template>
   <div>
     <div id="map" class="map w-100 p-3"/>
-    <br>
     <Weather
       @on-next="handleNext"
-      :temp="this.temp"
-      :minTemp="this.minTemp"
-      :maxTemp="this.maxTemp"
-      :humidity="this.humidity"
-      :wind="this.wind"
-      :icon="this.icon"
-      :date="this.date"
-      :description="this.description"
-      :city="this.city"
+      @on-prev="handlePrev"
+      :temp="temp"
+      :minTemp="minTemp"
+      :maxTemp="maxTemp"
+      :humidity="humidity"
+      :wind="wind"
+      :icon="icon"
+      :date="date"
+      :description="description"
+      :city="city"
     />
   </div>
 </template>
@@ -20,7 +20,7 @@
 <script>
 import axios from "axios";
 //we import the Wheather component because we'll send props to it
-import Weather from "@/components/Weather";
+import Weather from "./Weather";
 export default {
   props: {
     input: String //defined a prop because we're taking in data from the parent "App"
@@ -31,6 +31,7 @@ export default {
       mymap: null,
       index: 0,
       temp: 0,
+      temperatureArr: [],
       //description of the weather. I.E cloudy, sunny..etc
       description: "",
       minTemp: 0,
@@ -64,12 +65,20 @@ export default {
         we then call getWeather again to reassign the variables to the right city*/
       this.mymap.remove();
       this.city = this.input;
-      this.getWeather();
+      this.getWeather(0);
     },
 
     handleNext() {
-      this.index += 1;
-      this.getWeather();
+      if (this.index + 1 < this.temperatureArr.length) {
+        this.index++;
+        this.setData();
+      }
+    },
+    handlePrev() {
+      if (this.index >= 1) {
+        this.index--;
+        this.setData();
+      }
     },
     getWeather() {
       //here we get the API and make the city dynamic
@@ -82,30 +91,27 @@ export default {
         .then(response => {
           this.long = response.data.city.coord.lon;
           this.lat = response.data.city.coord.lat;
-          if (this.mymap) {
-            this.initMap();
-          }
-
           this.temperatureArr = response.data.list;
-          this.temp = this.temperatureArr[this.index].main.temp;
-          this.description = this.temperatureArr[
-            this.index
-          ].weather[0].description;
-          this.icon = this.temperatureArr[this.index].weather[0].icon;
-          this.minTemp = this.temperatureArr[this.index].main.temp_min;
-          this.maxTemp = this.temperatureArr[this.index].main.temp_max;
-          this.humidity = this.temperatureArr[this.index].main.humidity + "%";
-          this.wind = this.temperatureArr[this.index].main.humidity + "m/s";
+          this.index = 0;
 
-          this.date = this.temperatureArr[this.index].dt_txt;
           //variables assigned
           this.initMap();
+          this.setData();
         })
         .catch(error => {
           console.log(error);
         });
     },
-
+    setData() {
+      this.temp = this.temperatureArr[this.index].main.temp;
+      this.description = this.temperatureArr[this.index].weather[0].description;
+      this.icon = this.temperatureArr[this.index].weather[0].icon;
+      this.minTemp = this.temperatureArr[this.index].main.temp_min;
+      this.maxTemp = this.temperatureArr[this.index].main.temp_max;
+      this.humidity = this.temperatureArr[this.index].main.humidity + "%";
+      this.wind = this.temperatureArr[this.index].wind.speed + " m/s";
+      this.date = this.temperatureArr[this.index].dt_txt;
+    },
     initMap() {
       //We set the coordinates for where the map is centered. Zoom is set to 13
       this.mymap = L.map("map").setView([this.lat, this.long], 13);

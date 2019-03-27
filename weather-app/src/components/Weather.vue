@@ -2,19 +2,19 @@
   <div>
     <b-card-group deck>
       <b-card style="max-width: 20rem;">
-        <b-card-title>{{this.date}}</b-card-title>
+        <b-card-title>{{date}}</b-card-title>
         <b-img :src="image" fluid alt="Responsive image"/>
-        <b-card-text>{{this.description}}</b-card-text>
-        <b-card-text>Temperature: {{this.temp}}</b-card-text>
-        <b-card-text>Min-Temperature: {{this.minTemp}}</b-card-text>
-        <b-card-text>Max-Temperature: {{this.maxTemp}}</b-card-text>
-        <b-card-text>Wind: {{this.wind}}</b-card-text>
-        <b-card-text>Humidity: {{this.humidity}}</b-card-text>
+        <b-card-text>{{description}}</b-card-text>
+        <b-card-text>Temperature: {{temp}} &deg;C</b-card-text>
+        <b-card-text>Min-Temperature: {{minTemp}} &deg;C</b-card-text>
+        <b-card-text>Max-Temperature: {{maxTemp}} &deg;C</b-card-text>
+        <b-card-text>Wind: {{wind}}</b-card-text>
+        <b-card-text>Humidity: {{humidity}}</b-card-text>
       </b-card>
     </b-card-group>
     <br>
     <div>
-      <b-button block variant="outline-dark">&lsaquo; Previous</b-button>
+      <b-button block variant="outline-dark" @click="handlePrev">&lsaquo; Previous</b-button>
       <b-button block variant="outline-dark" @click="handleNext">Next &rsaquo;</b-button>
     </div>
     <br>
@@ -40,13 +40,15 @@ export default {
     minTemp: Number,
     maxTemp: Number
   },
-
   updated() {
     this.image = "http://openweathermap.org/img/w/" + this.icon + ".png";
   },
   methods: {
     handleNext() {
       this.$emit("on-next");
+    },
+    handlePrev() {
+      this.$emit("on-prev");
     }
   }
 };
