@@ -16,7 +16,7 @@
     />
   </div>
 </template>
-
+ 
 <script>
 import axios from "axios";
 //we import the Wheather component because we'll send props to it
@@ -38,7 +38,7 @@ export default {
       maxTemp: 0,
       humidity: "",
       wind: "",
-      /*will be passed to the Weather component. Icon contains a 
+      /*will be passed to the Weather component. Icon contains a
       string which will be put in a URL where we get our weather icons
       */
       icon: "",
@@ -57,7 +57,7 @@ export default {
      the variables above*/
     this.getWeather();
   },
-
+ 
   methods: {
     updateMap() {
       /*in this method we first remove the map that's initialized in initMap()
@@ -67,8 +67,14 @@ export default {
       this.city = this.input;
       this.getWeather(0);
     },
-
+ 
     handleNext() {
+      /*we have two buttons, NEXT and PREV that goes through the
+      API when pressed and shows the wheather 3 hours from now or 
+      3 hours prior. This is done by incrementing decrementing the array index of List
+      (which is a json-array in the api) 
+      */      
+
       if (this.index + 1 < this.temperatureArr.length) {
         this.index++;
         this.setData();
@@ -81,7 +87,7 @@ export default {
       }
     },
     getWeather() {
-      //here we get the API and make the city dynamic
+      //here we make a dynamic api call by using the city variable
       axios
         .get(
           "http://api.openweathermap.org/data/2.5/forecast?q=" +
@@ -89,12 +95,12 @@ export default {
             "&APPID=fb7ab8e839d245357544158716e0b60c&units=metric"
         )
         .then(response => {
+          //variables assigned
           this.long = response.data.city.coord.lon;
           this.lat = response.data.city.coord.lat;
           this.temperatureArr = response.data.list;
           this.index = 0;
-
-          //variables assigned
+         
           this.initMap();
           this.setData();
         })
@@ -103,6 +109,7 @@ export default {
         });
     },
     setData() {
+      //Assign variables
       this.temp = this.temperatureArr[this.index].main.temp;
       this.description = this.temperatureArr[this.index].weather[0].description;
       this.icon = this.temperatureArr[this.index].weather[0].icon;
@@ -117,7 +124,7 @@ export default {
       this.mymap = L.map("map").setView([this.lat, this.long], 13);
       //We set a marker
       var marker = L.marker([this.lat, this.long]).addTo(this.mymap);
-
+ 
       //here we give our map a layout
       L.tileLayer(
         "https://api.tiles.mapbox.com/v4/{id}/{z}/{x}/{y}.png?access_token={accessToken}",

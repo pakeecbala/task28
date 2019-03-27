@@ -2,7 +2,8 @@
   <v-app>
     <v-toolbar app>
       <v-toolbar-title class="headline text-uppercase">
-        <span class="font-weight-light">MICHAEL & PAKEE</span>
+        <span style="margin:auto;" class="font-weight-dark"> Weather Application </span> 
+        <span class="font-weight-light">    MICHAEL & PAKEE    </span>
       </v-toolbar-title>
     </v-toolbar>
 
