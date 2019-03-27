@@ -1,8 +1,8 @@
 <template>
   <div>
-    <b-card-group deck>
-      <b-card>
-        <b-card-text>{{this.date}}</b-card-text>
+    <b-card-group deck style="align: auto;">
+      <b-card style="max-width: 20rem; align: 0 auto;">
+        <b-card-title>{{this.date}}</b-card-title>
         <b-img :src="image" fluid alt="Responsive image"/>
         <b-card-text>{{this.description}}</b-card-text>
         <b-card-text>Temperature: {{this.temp}}</b-card-text>

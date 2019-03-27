@@ -37,7 +37,6 @@ export default {
       city: ""
     };
   },
-  props: {},
   components: {
     Weather
   },
@@ -79,7 +78,6 @@ export default {
           this.date = this.temperatureArr[this.index].dt_txt;
           console.log(response.data);
           this.initMap();
-
         })
         .catch(error => {
           console.log(error);
