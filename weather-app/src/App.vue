@@ -7,7 +7,7 @@
       </v-toolbar-title>
     </v-toolbar>
 
-    <v-content min-vw-100>
+    <v-content>
       <Map/>
       <Weather/>
     </v-content>
