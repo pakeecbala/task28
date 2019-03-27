@@ -1,6 +1,7 @@
 <template>
   <div>
     <div id="map" class="map w-100 p-3"/>
+    <br>
     <Weather
       @on-next="handleNext"
       @on-prev="handlePrev"
@@ -13,11 +14,16 @@
       :date="date"
       :description="description"
       :city="city"
+      :temperatureArr="temperatureArr"
+      :index="index"
     />
   </div>
 </template>
  
 <script>
+/*This component takes care of the logic like doing the API calls, rendering the map -
+  and the forecast logic
+*/
 import axios from "axios";
 //we import the Wheather component because we'll send props to it
 import Weather from "./Weather";
@@ -77,13 +83,13 @@ export default {
 
       if (this.index + 1 < this.temperatureArr.length) {
         this.index++;
-        this.setData();
+      
       }
     },
     handlePrev() {
       if (this.index >= 1) {
         this.index--;
-        this.setData();
+        
       }
     },
     getWeather() {
@@ -102,14 +108,14 @@ export default {
           this.index = 0;
          
           this.initMap();
-          this.setData();
+          this.setInitData();
         })
         .catch(error => {
           console.log(error);
         });
     },
-    setData() {
-      //Assign variables
+    setInitData() {
+      //Assign variables for the initial state of the app. 
       this.temp = this.temperatureArr[this.index].main.temp;
       this.description = this.temperatureArr[this.index].weather[0].description;
       this.icon = this.temperatureArr[this.index].weather[0].icon;
