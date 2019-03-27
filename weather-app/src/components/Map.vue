@@ -5,7 +5,7 @@
         href="#"
         
       >
-        <span class="mr-2">Today {{temp}}</span>
+        <span class="mr-2">Today{{temp}}</span>
       </v-btn>
 
        <v-btn
