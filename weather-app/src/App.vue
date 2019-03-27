@@ -2,8 +2,8 @@
   <v-app>
     <v-toolbar app>
       <v-toolbar-title class="headline text-uppercase">
-        <span>Vuetify</span>
-        <span class="font-weight-light">MATERIAL DESIGN</span>
+        <span>Weather App</span>
+        <span class="font-weight-light">  MICHAEL &  PAKEE</span>
       </v-toolbar-title>
       <v-spacer></v-spacer>
       <v-btn
@@ -16,8 +16,10 @@
     </v-toolbar>
 
     <v-content>
-      <Map/>
+      
       <HelloWorld/>
+      <Map/>
+      
     </v-content>
   </v-app>
 </template>
@@ -26,13 +28,13 @@
 import HelloWorld from './components/HelloWorld'
 import Map from './components/Map'
 import MapForecast from './components/MapForecast'
+import Cities from './components/Cities'
 
 export default {
   name: 'App',
   components: {
     HelloWorld,
-    Map,
-    MapForecast
+    Map
   },
   data () {
     return {
