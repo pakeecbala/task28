@@ -4,13 +4,18 @@
       <v-toolbar-title class="headline text-uppercase">
         <span class="font-weight-light">MICHAEL & PAKEE</span>
       </v-toolbar-title>
-      <div class="col-md-3 input-group pull-right">
-        <input placeholder="search places" v-model="input" v-on:keyup.enter="$refs.mapRef.updateMap">
-      </div>
     </v-toolbar>
 
     <v-content>
-      <Map ref="mapRef" :input ="this.input" />
+      <v-text-field
+        hide-details
+        prepend-icon="search"
+        single-line
+        v-model="input"
+        v-on:keyup.enter="$refs.mapRef.updateMap"
+      ></v-text-field>
+
+      <Map ref="mapRef" :input="this.input"/>
       <br>
     </v-content>
   </v-app>
@@ -28,7 +33,7 @@ export default {
   },
   data() {
     return {
-      input: "",
+      input: ""
     };
   }
 };
