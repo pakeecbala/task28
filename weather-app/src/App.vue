@@ -9,7 +9,6 @@
     <v-content>
       <Map/>
       <br>
-      
     </v-content>
   </v-app>
 </template>

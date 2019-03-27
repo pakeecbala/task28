@@ -1,69 +1,87 @@
 <template>
   <div>
     <div id="map" class="map w-100 p-3"/>
-    <Weather :temp= this.temp :wind= this.wind :humidity= this.humidity :city = this.city :description = this.description :icon = this.icon />
-
+    <Weather
+      @on-next="handleNext"
+      :temp="this.temp"
+      :wind="this.wind"
+      :humidity="this.humidity"
+      :city="this.city"
+      :description="this.description"
+      :icon="this.icon"
+      :date="this.date"
+    />
   </div>
-  
-  
-
 </template>
 
 <script>
 import axios from "axios";
 import Weather from "@/components/Weather";
 export default {
-  props: {
-    temp: '',
-    minTemp: '',
-    maxTemp:'',
-    description: '',
-    iconURL: '',
-    pressure: '',
-    humidity: '',
-    wind: '',
-    overcast: '', 
-    icon: '',
-    long: '',
-    lat: '',
-    city: '',
-    temperatureArr: [],
-    descriptionArr: [],
-    
+  data: function() {
+    return {
+      mymap: null,
+      index: 0,
+      temp: 0,
+      minTemp: "",
+      maxTemp: "",
+      description: "",
+      iconURL: "",
+      pressure: "",
+      humidity: "",
+      wind: "",
+      overcast: "",
+      icon: "",
+      long: "",
+      lat: "",
+      city: "",
+      date: "",
+      temperatureArr: [],
+      descriptionArr: []
+    };
   },
-  components:{
+  props: {},
+  components: {
     Weather
   },
-
-  beforeMount(){
-    this.getWeather();
-
+  mounted() {
+    this.initMap();
   },
-  
+
   methods: {
+    handleNext() {
+      this.index += 1;
+      this.getWeather();
+    },
     getWeather() {
-      this.city= "paris";
+      this.city = "oslo";
       axios
         .get(
-          "http://api.openweathermap.org/data/2.5/forecast?q="+this.city+"&APPID=f750b0887be2c24fd1390dd30bec8f1a&units=metric"
+          "http://api.openweathermap.org/data/2.5/forecast?q=" +
+            this.city +
+            "&APPID=f750b0887be2c24fd1390dd30bec8f1a&units=metric"
         )
         .then(response => {
-          this.temperatureArr = response.data.list[0];
           this.long = response.data.city.coord.lon;
           this.lat = response.data.city.coord.lat;
-          this.temp = this.temperatureArr.main.temp;
-          this.description = response.data.list[1].weather[0].description;
-          this.icon = response.data.list[1].weather[0].icon;
-          this.minTemp = this.temperatureArr.main.min_temp;
-          this.maxTemp = this.temperatureArr.main.temp_max;
-          this.pressure = this.temperatureArr.main.pressure;
-          this.humidity = this.temperatureArr.main.humidity + '%';
-          this.wind = this.temperatureArr.main.humidity + 'm/s';
-          
-          this.initMap();
+          if (this.mymap) {
+            this.initMap();
+          }
 
-        
-  
+          this.temperatureArr = response.data.list;
+          this.temp = this.temperatureArr[this.index].main.temp;
+          this.description = this.temperatureArr[
+            this.index
+          ].weather[0].description;
+          this.icon = this.temperatureArr[this.index].weather[0].icon;
+          this.minTemp = this.temperatureArr[this.index].main.min_temp;
+          this.maxTemp = this.temperatureArr[this.index].main.temp_max;
+          this.pressure = this.temperatureArr[this.index].main.pressure;
+          this.humidity = this.temperatureArr[this.index].main.humidity + "%";
+          this.wind = this.temperatureArr[this.index].main.humidity + "m/s";
+
+          this.date = this.temperatureArr[this.index].dt_txt;
+          console.log(response.data);
         })
         .catch(error => {
           console.log(error);
@@ -71,10 +89,9 @@ export default {
     },
 
     initMap() {
-      console.log(this.lat, this.long)
-      var mymap = L.map("map").setView([this.lat,this.long], 13);
-      var marker = L.marker([this.lat, this.long]).addTo(mymap);
-
+      console.log(this.lat, this.long);
+      this.mymap = L.map("map").setView([this.lat, this.long], 13);
+      var marker = L.marker([this.lat, this.long]).addTo(this.mymap);
 
       L.tileLayer(
         "https://api.tiles.mapbox.com/v4/{id}/{z}/{x}/{y}.png?access_token={accessToken}",
@@ -86,9 +103,8 @@ export default {
           accessToken:
             "pk.eyJ1Ijoid29raW5nIiwiYSI6ImNqdHByejVjcjA3Nm80ZHIwZTgydDA0aWYifQ.A7Nu-j7baTtMJnjPzrTlNA"
         }
-      ).addTo(mymap);
-    },
-   
+      ).addTo(this.mymap);
+    }
   }
 };
 </script>
