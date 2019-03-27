@@ -1,6 +1,6 @@
 <template>
   <div>
-    <b-card-group deck>
+    <b-card-group deck class="p-3 mb-2 bg-light text-dark">
       <b-card style="max-width: 20rem;">
         <b-card-title>{{date}}</b-card-title>
         <b-img :src="image" fluid alt="Responsive image"/>

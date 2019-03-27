@@ -1,15 +1,16 @@
 <template>
-  <v-app>
-    <v-toolbar app>
+  <v-app class="p-3 mb-2 bg-light text-dark">
+    <v-toolbar app class="p-3 mb-2 bg-dark text-white">
       <v-toolbar-title class="headline text-uppercase">
         <span class="font-weight-light">MICHAEL & PAKEE</span>
       </v-toolbar-title>
     </v-toolbar>
-
+    <br>
     <v-content>
       <v-text-field
         hide-details
         prepend-icon="search"
+        label="Oslo"
         single-line
         v-model="input"
         v-on:keyup.enter="$refs.mapRef.updateMap"
