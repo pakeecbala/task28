@@ -4,6 +4,9 @@
       <v-toolbar-title class="headline text-uppercase">
         <span class="font-weight-light">MICHAEL & PAKEE</span>
       </v-toolbar-title>
+      <div class="col-md-3 input-group pull-right">
+        <input placeholder="search places">
+      </div>
     </v-toolbar>
 
     <v-content>
