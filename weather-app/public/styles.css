@@ -1,3 +1,7 @@
-.map{ margin:auto;
+.map{ 
+      display: flex;
+      justify-content: flex-start;
       height: 300px;
-      width:400px; }
+      width:400px; 
+      
+}

@@ -2,12 +2,17 @@
   <v-app>
     <v-toolbar app>
       <v-toolbar-title class="headline text-uppercase">
-        <span>MP -</span>
-        <span class="font-weight-light">GROUP TASK 28</span>
+        <span>Weather App{{Map.temp}}</span>
+        <span class="font-weight-light">  MICHAEL &  PAKEE</span>
+        
       </v-toolbar-title>
     </v-toolbar>
 
     <v-content>
+      
+      <HelloWorld/>
+      <Map/>
+      
       <Map/>
       <br>
       <Weather/>
@@ -16,15 +21,15 @@
 </template>
 
 <script>
-import Map from "./components/Map";
-import MapForecast from "./components/MapForecast";
+import HelloWorld from './components/HelloWorld'
+import Map from './components/Map'
 import Weather from "./components/Weather";
 
 export default {
   name: "App",
   components: {
+    HelloWorld,
     Map,
-    MapForecast,
     Weather
   },
   data() {
