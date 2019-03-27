@@ -1,18 +1,18 @@
 <template>
-  <v-app class="p-3 mb-2 bg-light text-dark">
-    <v-toolbar app class="p-3 mb-2 bg-dark text-white">
+  <v-app>
+    <v-toolbar app>
       <v-toolbar-title class="headline text-uppercase">
-        <span class="font-weight-light">MICHAEL & PAKEE</span>
+        <span class="font-weight-light">MICHAEL & PAKEE - GROUPTASK 28</span>
       </v-toolbar-title>
     </v-toolbar>
-    <br>
+
     <v-content>
       <v-text-field
         hide-details
         prepend-icon="search"
-        label="Oslo"
         single-line
         v-model="input"
+        label="Oslo"
         v-on:keyup.enter="$refs.mapRef.updateMap"
       ></v-text-field>
 
