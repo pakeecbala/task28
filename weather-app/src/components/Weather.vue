@@ -3,8 +3,7 @@
     <b-card no-body class="overflow-hidden" style="max-width: 540px;">
       <b-row no-gutters>
         <b-col md="6">
-          <b-card-body title="OSLO">
-            <b-card-text>CurrentWeather</b-card-text>
+          <b-card-body title="Current weather in Oslo">
             <b-card-text>Temperature: N/A</b-card-text>
             <b-card-text>Wind: N/A</b-card-text>
             <b-card-text>Humidity: N/A</b-card-text>
