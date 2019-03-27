@@ -1,6 +1,7 @@
 <template>
   <div>
     <div id="map" class="map w-100 p-3"/>
+    <br>
     <Weather
       @on-next="handleNext"
       @on-prev="handlePrev"
